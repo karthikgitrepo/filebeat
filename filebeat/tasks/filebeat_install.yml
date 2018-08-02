@@ -1,0 +1,14 @@
+- name: Filebeat repo key
+  rpm_key: 
+    key="http://packages.elastic.co/GPG-KEY-elasticsearch"
+    state=present
+
+- name: Enable filebeat repo
+  template:
+    src=elastic-beats_repo.j2
+    dest=/etc/yum.repos.d/elastic-beats.repo
+
+- name: Install filebeat
+  yum:
+    name=filebeat
+    state=latest
